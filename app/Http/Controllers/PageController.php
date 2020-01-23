@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Page;
 use Illuminate\Http\Request;
 use Auth;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class PageController extends Controller
 {
@@ -43,12 +43,18 @@ class PageController extends Controller
     public function store(Request $request)
     {
         //
+        $username = Auth::user()->username;
+        $url = $request['url'];
+        $validatedData = $request->validate([
+            'url' => ['required', 'string', 'max:255', 'alpha_dash', 'unique:pages,url,NULL,id,username,'.$username],
+            'html_code' => ['required', 'string'],
+        ]);
 
         $page = new Page();
         $page->url = $request['url'];
         $page->html_code = $request['html_code'];
         $page->is_public = $request['is_public'] == 'on' ? true : false;
-        $page->username = Auth::user()->username;
+        $page->username = $username;
         Auth::user()->pages()->save($page);
 
         return redirect('/'.$page->username.'/'.$page->url.'/edit')->withSuccess(__('pages.created'));

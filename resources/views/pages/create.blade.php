@@ -13,6 +13,7 @@
                         <form method="POST" action="{{ route('pages.store') }}">
                             @csrf
                             <div class="form-group form-inline">
+
                                 <div class="col-sm-6 my-1">
                                     <label class="sr-only" for="url">url</label>
                                     <div class="input-group">
@@ -20,20 +21,23 @@
                                             <div class="input-group-text">mjacksi.com/{{ $username}}/</div>
                                         </div>
                                         <input type="text" class="form-control @error('url') is-invalid @enderror"
-                                               name="url" value="{{ old('url') }}" placeholder="pagename" required>
-                                    </div>
-                                    @error('url')
-                                    <span class="invalid-feedback" role="alert">
+                                               id="url" name="url" value="{{ old('url') }}" placeholder="pagename"
+                                               onerror="hi"
+                                               required>@error('url')
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                    @enderror
+                                        @enderror
+                                    </div>
+
                                 </div>
                             </div>
 
 
                             <div class="form-group row">
                                 <div class="col-md-7 offset-md-5">
-                                    <label for="html_code" class="col-form-label text-md-right">Type HTML code here:</label>
+                                    <label for="html_code" class="col-form-label text-md-right">Type HTML code
+                                        here:</label>
                                 </div>
                             </div>
 
@@ -47,6 +51,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center bd-highlight mb-3">
@@ -107,4 +112,21 @@
             padding-left: 0px;
             padding-right: 0px;
         }
-    </style>@endpush
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $('#url').on('keypress', function (event) {
+
+                var regex = new RegExp("^[a-zA-Z0-9]+$");
+                var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+                if (!regex.test(key)) {
+                    event.preventDefault();
+                    return false;
+                }
+            });
+        });
+    </script>
+
+
+@endpush
