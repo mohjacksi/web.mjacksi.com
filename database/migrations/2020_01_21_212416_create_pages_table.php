@@ -14,9 +14,9 @@ class CreatePagesTable extends Migration
     public function up()
     {
         Schema::create('pages', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('views')->default(0);
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('views')->default(0);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('username');
             $table->string('url');

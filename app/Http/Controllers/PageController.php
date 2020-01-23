@@ -64,8 +64,18 @@ class PageController extends Controller
     public function show($username, $url)
     {
         $page = Page::where(['username' => $username, 'url' => $url])->first();
-        $page->increment("views",1);
 
+        if(!$page->is_public)
+        {
+            if(auth()->check()){
+                if (Auth::user()->username != $username)
+                    abort(403, 'Page is not public!.');
+            }else{
+                abort(403, 'Page is not public!.');
+            }
+        }
+
+        $page->increment("views",1);
         return view('pages.show')->with(['page' => $page]);
     }
 

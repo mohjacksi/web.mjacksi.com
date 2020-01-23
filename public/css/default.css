@@ -75,3 +75,37 @@
      padding-top: 12px;
      padding-left: 10px;
  }
+
+
+
+ .bootstrap-off {
+     margin: 0;
+     padding: 0;
+     border: 0;
+     font-size: 100%;
+     font: inherit;
+     vertical-align: baseline;
+ }
+ /* HTML5 display-role reset for older browsers */
+ article, aside, details, figcaption, figure,
+ footer, header, hgroup, menu, nav, section {
+     display: block;
+ }
+ body-bootstrap-off {
+     line-height: 1;
+ }
+ ol-bootstrp-off, ul-bootstrp-off {
+     list-style: none;
+ }
+ blockquote-bootstrap-off, q-bootstrap-off {
+     quotes: none;
+ }
+ blockquote-bootstrap-off:before, blockquote-bootstrap-off:after,
+ q-bootstrap-off:before, q-bootstrap-off:after {
+     content: '';
+     content: none;
+ }
+ table-bootstrap-off {
+     border-collapse: collapse;
+     border-spacing: 0;
+ }

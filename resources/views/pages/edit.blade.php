@@ -7,10 +7,11 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">{{ __('Editing page') }} "<a href="/{{$page->username}}/{{$page->url}}">{{$page->url}}</a>"
+                    <div class="card-header">{{ __('Editing page') }} "<a
+                            href="/{{$page->username}}/{{$page->url}}">{{$page->url}}</a>"
                     </div>
 
-                    <div class="card-body" >
+                    <div class="card-body">
                         <form method="POST" action="{{ route('pages.update',$page->id) }}">
 
                             @csrf
@@ -18,8 +19,9 @@
 
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <label for="html_code" class="col-form-label text-md-right">Type HTML code here:</label>
+                                <div class="col-md-7 offset-md-5">
+                                    <label for="html_code" class="col-form-label text-md-right">Type HTML code
+                                        here:</label>
                                 </div>
                             </div>
 
@@ -29,8 +31,6 @@
                                               class="form-control @error('html_code') is-invalid @enderror codemirror-textarea"
                                               name="html_code" rows="10" required
                                               autofocus>{{ $page->html_code }}</textarea>
-
-
                                     @error('html_code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -38,35 +38,38 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <div class="col-md-6 offset-md-5">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="is_public"
-                                               id="is_public" {{ $page->is_public ? 'checked' : '' }}>
-                                        <label class="form-check-label" for="remember">
-                                            {{ __('Public?') }}
-                                        </label>
+                            <div class="d-flex justify-content-center bd-highlight mb-3">
+                                <div class="p-2 bd-highlight">
+                                    <div class="custom-control custom-checkbox checkbox-xl">
+                                        <input type="checkbox" class="custom-control-input" name="is_public"
+                                               id="is_public" {{$page->is_public ? "checked" : null}}>
+                                        <label class="custom-control-label" for="is_public">Make page public?</label>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="form-group row mb-0">
-                                <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                <div class="p-2 bd-highlight">
+                                    <button type="submit" class="btn btn-lg btn-primary">
                                         {{ __('Save') }}
                                     </button>
-                                    <button type="button" id="preview" class="btn btn-success">
+                                </div>
+                                {{--<div class="p-2 bd-highlight">
+                                    <button type="button" id="preview" class="btn btn-lg btn-success">
                                         {{ __('Preview') }}
                                     </button>
-                                    <a class="btn btn-primary" target="_blank"
-                                       href="/{{$page->username}}/{{$page->url}}" role="button">{{__('Open in new window')}}</a>
-
+                                </div>--}}
+                                <div class="p-2 bd-highlight">
+                                    <a class="btn btn-lg btn-success" target="_blank"
+                                       href="/{{$page->username}}/{{$page->url}}"
+                                       role="button">{{__('Preview')}}</a>
                                 </div>
-                            </div>
 
+                            </div>
                         </form>
                     </div>
-                    <div class="card-body" >
+                    <div class="card-body">
+                        <style scoped>
+
+                        </style>
+
                         <div id="preview_html_code"></div>
                     </div>
                 </div>
@@ -99,8 +102,10 @@
             border-bottom: 1px solid #888;
             font-size: x-large;
         }
-        .card-body{
-            padding-left: 0px; padding-right: 0px;
+
+        .card-body {
+            padding-left: 0px;
+            padding-right: 0px;
         }
     </style>
 @endpush

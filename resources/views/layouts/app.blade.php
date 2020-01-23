@@ -47,9 +47,13 @@
                     Learn web step by step!
                 </ul>
                 <nav class="nav nav-pills ">
-                    <a class="nav-item nav-link {{ Request::is('pages') ? 'active' : '' }}" href="{{ url('/pages') }}">All Pages</a>
-                    <a class="nav-item nav-link {{ Request::is(Auth::user()->username) ? 'active' : '' }}" href="{{ url('/'.Auth::user()->username) }}">Public Pages</a>
+                    @auth
+                        <a class="nav-item nav-link {{ Request::is('pages') ? 'active' : '' }}"
+                           href="{{ url('/pages') }}">All Pages</a>
 
+                        <a class="nav-item nav-link {{ Request::is(Auth::user()->username) ? 'active' : '' }}"
+                           href="{{ url('/'.Auth::user()->username) }}">Public Pages</a>
+                    @endauth
                 </nav>
 
                 <!-- Right Side Of Navbar -->

@@ -12,12 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $pages = \App\Page::where('is_public',true)->limit(10)->OrderBy('id','DESC')->get();
+    return view('welcome')->with(['pages'=>$pages]);
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+
 
 Route::group(['middleware' => ['auth']], function () {
     // Logout
@@ -31,7 +33,8 @@ Route::group(['middleware' => ['auth']], function () {
     //Edit page
     Route::get('/pages','PageController@index')->name('home');
     Route::get('{username}/{url}/edit','PageController@edit')->name('page.edit_by_username_url');
-    Route::get('{username}/{url}','PageController@show');
+
     Route::put('{username}/{url}/put','PageController@update');
     Route::get('{username}','PageController@getPublicPages');
 });
+Route::get('{username}/{url}','PageController@show');

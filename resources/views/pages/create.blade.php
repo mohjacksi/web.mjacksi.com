@@ -31,10 +31,9 @@
                             </div>
 
 
-                            <div class="form-group row mb-0">
+                            <div class="form-group row">
                                 <div class="col-md-7 offset-md-5">
-                                    <label for="html_code" class="col-form-label text-md-right">Type HTML code
-                                        here:</label>
+                                    <label for="html_code" class="col-form-label text-md-right">Type HTML code here:</label>
                                 </div>
                             </div>
 
@@ -43,8 +42,6 @@
                                     <textarea id="html_code"
                                               class="form-control @error('html_code') is-invalid @enderror codemirror-textarea"
                                               name="html_code" rows="10" autofocus></textarea>
-
-
                                     @error('html_code')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -65,11 +62,11 @@
                                         {{ __('Save') }}
                                     </button>
                                 </div>
-                                <div class="p-2 bd-highlight">
+                                {{--<div class="p-2 bd-highlight">
                                     <button type="button" id="preview" class="btn btn-lg btn-success">
                                         {{ __('Preview') }}
                                     </button>
-                                </div>
+                                </div>--}}
                             </div>
                         </form>
                     </div>
