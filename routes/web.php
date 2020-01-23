@@ -36,6 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('{username}/{url}/edit','PageController@edit')->name('page.edit_by_username_url');
 
     Route::put('{username}/{url}/put','PageController@update');
-    Route::get('{username}','PageController@get_public_pages_of');
 });
 Route::get('{username}/{url}','PageController@show');
+Route::get('{username}','PageController@get_public_pages_of');
