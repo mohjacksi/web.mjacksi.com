@@ -93,7 +93,8 @@
         <div class="title ">
             Learn web
         </div>
-
+        <div>
+        </div>
         <div class="m-b-md">
             <h3>With <a href=""><u>Mohammed Jacksi</u></a> ;)</h3>
         </div>

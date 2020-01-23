@@ -49,10 +49,10 @@
                 <nav class="nav nav-pills ">
                     @auth
                         <a class="nav-item nav-link {{ Request::is('pages') ? 'active' : '' }}"
-                           href="{{ url('/pages') }}">All Pages</a>
+                           href="{{ url('/pages') }}">My Pages</a>
 
-                        <a class="nav-item nav-link {{ Request::is(Auth::user()->username) ? 'active' : '' }}"
-                           href="{{ url('/'.Auth::user()->username) }}">Public Pages</a>
+                        <a class="nav-item nav-link {{ Request::is('public-pages') ? 'active' : '' }}"
+                           href="{{ url('/public-pages') }}">Public Pages</a>
                     @endauth
                 </nav>
 

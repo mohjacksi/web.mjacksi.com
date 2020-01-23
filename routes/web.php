@@ -20,6 +20,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
+Route::get('/public-pages','PageController@public_pages');
 
 Route::group(['middleware' => ['auth']], function () {
     // Logout
@@ -35,6 +36,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('{username}/{url}/edit','PageController@edit')->name('page.edit_by_username_url');
 
     Route::put('{username}/{url}/put','PageController@update');
-    Route::get('{username}','PageController@getPublicPages');
+    Route::get('{username}','PageController@get_public_pages_of');
 });
 Route::get('{username}/{url}','PageController@show');

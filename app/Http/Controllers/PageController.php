@@ -124,13 +124,21 @@ class PageController extends Controller
     public function destroy($id)
     {
         //
+        Page::find($id)->delete();
+        return redirect('/pages')->withSuccess(__('pages.destroyed'));
+
     }
 
 
-    public function getPublicPages($username){
+    public function get_public_pages_of($username){
         $pages = Page::where(['username'=>$username,'is_public'=> true])->get();
 
-        return view('pages.public_pages')->with(['pages' => $pages,'username'=>$username]);
-
+        return view('pages.public_pages_of')->with(['pages' => $pages,'username'=>$username]);
     }
+
+    public function public_pages(){
+        $pages = Page::where(['is_public'=> true])->orderBy('id')->get();
+        return view('pages.public_pages')->with(['pages' => $pages]);
+    }
+
 }

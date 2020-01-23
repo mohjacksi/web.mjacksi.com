@@ -16,8 +16,6 @@
 
                             @csrf
                             @method('PUT')
-
-
                             <div class="form-group row mb-0">
                                 <div class="col-md-7 offset-md-5">
                                     <label for="html_code" class="col-form-label text-md-right">Type HTML code
@@ -66,10 +64,6 @@
                         </form>
                     </div>
                     <div class="card-body">
-                        <style scoped>
-
-                        </style>
-
                         <div id="preview_html_code"></div>
                     </div>
                 </div>
