@@ -100,7 +100,12 @@ class PageController extends Controller
     public function edit($username, $url)
     {
         $page = Page::where(['username' => $username, 'url' => $url])->first();
-
+        if(auth()->check()){
+            if (Auth::user()->username != $username)
+                abort(403, 'You do not have the right to edit this page!.');
+        }else{
+            abort(403, 'You do not have the right to edit this page!.');
+        }
         return view('pages.edit')->with(['page' => $page]);
     }
 
@@ -114,7 +119,15 @@ class PageController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $username = Auth::user()->username;
         $page = Page::find($id);
+        if(auth()->check()){
+            if (Auth::user()->username != $username)
+                abort(403, 'You do not have the right to edit this page!.');
+        }else{
+            abort(403, 'You do not have the right to edit this page!.');
+        }
+
         $page->html_code = $request['html_code'];
         $page->is_public = $request['is_public'] == 'on' ? true : false;
         $page->save();
