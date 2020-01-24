@@ -102,9 +102,9 @@ class PageController extends Controller
         $page = Page::where(['username' => $username, 'url' => $url])->first();
         if(auth()->check()){
             if (Auth::user()->username != $username)
-                abort(403, 'You do not have the right to edit this page!.');
+                abort(403, 'You do not have the right to edit this page!');
         }else{
-            abort(403, 'You do not have the right to edit this page!.');
+            abort(403, 'You do not have the right to edit this page!');
         }
         return view('pages.edit')->with(['page' => $page]);
     }
@@ -119,13 +119,12 @@ class PageController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $username = Auth::user()->username;
         $page = Page::find($id);
         if(auth()->check()){
-            if (Auth::user()->username != $username)
-                abort(403, 'You do not have the right to edit this page!.');
+            if (Auth::user()->username != $page->username)
+                abort(403, 'You do not have the right to edit this page!');
         }else{
-            abort(403, 'You do not have the right to edit this page!.');
+            abort(403, 'You do not have the right to edit this page!');
         }
 
         $page->html_code = $request['html_code'];
@@ -143,19 +142,28 @@ class PageController extends Controller
     public function destroy($id)
     {
         //
-        Page::find($id)->delete();
+        $page = Page::find($id);
+        if(auth()->check()){
+            if (Auth::user()->username != $page->username)
+                abort(403, 'You do not have the right to edit this page!');
+        }else{
+            abort(403, 'You do not have the right to edit this page!');
+        }
+
+        $page->delete();
         return redirect('/pages')->withSuccess(__('pages.destroyed'));
 
     }
 
 
     public function get_public_pages_of($username){
+        //
         $pages = Page::where(['username'=>$username,'is_public'=> true])->get();
-
         return view('pages.public_pages_of')->with(['pages' => $pages,'username'=>$username]);
     }
 
     public function public_pages(){
+        //
         $pages = Page::where(['is_public'=> true])->orderBy('id')->get();
         return view('pages.public_pages')->with(['pages' => $pages]);
     }
